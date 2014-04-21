@@ -1,6 +1,6 @@
 from collections import OrderedDict
 import mcstatus, yaml, time, threading
-from bottle import route, run, template, static_file
+from bottle import route, run, template, static_file, error
 
 data = {}
 
@@ -20,11 +20,11 @@ for category in servers_config:
         data[category][server] = status
 
 def update_all():
-    i = 0.0
+#    i = 0.0
     for category in data:
-        d = 5.0 / c
+#        d = 5.0 / c
         for server in data[category]:
-            i += 1.0
+#            i += 1.0
             status = data[category][server]
             threading.Thread(target=lambda: status.Update()).start()
 
@@ -64,6 +64,10 @@ def index():
 @route('/')
 def server_static():
     return static_file('index.html', '..')
+
+@error(404)
+def error404(error):
+    return static_file('404.html', '..')
 
 @route('/<filename>')
 def server_static(filename):
