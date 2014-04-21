@@ -48,8 +48,6 @@ class McServer:
       return self
     self._num_players_online = json_dict['players']['online']
     if self._num_players_online:
-      self._player_names_sample = frozenset(
-          player_data['name'] for player_data in json_dict['players']['sample'])
       self._max_players_online = json_dict['players']['max']
     self._available = True
     return self
@@ -165,7 +163,7 @@ if __name__ == '__main__':
   if server.available:
     logging.info(
         'available, %d/%d online: %s',
-        server.num_players_online, server.max_players_online
+        server.num_players_online, server.max_players_online,
         ', '.join(server.player_names_sample))
   else:
     logging.info('unavailable')
