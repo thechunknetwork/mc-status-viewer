@@ -1,5 +1,5 @@
 function populate() {
-    $.getJSON('sampledata.json?' + Math.floor(Math.random()*30000), function (data) {
+    $.getJSON('status?' + Math.floor(Math.random()*30000), function (data) {
         var x = "";
 
         for (var category in data.alive) {
