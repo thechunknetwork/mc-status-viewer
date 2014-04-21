@@ -6,6 +6,8 @@ data = {}
 with open('config.yml', 'r') as cfg_file:
     servers_config = yaml.load(cfg_file)
 
+c = 0.0
+
 for category in servers_config:
     print category
     data[category] = {}
@@ -13,16 +15,17 @@ for category in servers_config:
         print "- " + server + ": " + servers_config[category][server]
         ip = servers_config[category][server]
         status = mcstatus.McServer(ip.split("/")[0], int(ip.split("/")[1]))
+        c += 1
         data[category][server] = status
 
 def update_all():
-    i = 0
+    i = 0.0
     for category in data:
-        d = 0.005
+        d = 3.0 / c
         for server in data[category]:
-            i += 1
+            i += 1.0
             status = data[category][server]
-            threading.Thread(target=lambda: status.Update()).start()
+            threading.Timer(i * d, lambda: status.Update()).start()
 
 def generate_json():
     alive = "alive"
