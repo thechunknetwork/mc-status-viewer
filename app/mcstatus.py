@@ -40,6 +40,7 @@ class McServer:
     self._player_names_sample = frozenset()
 
   def Update(self):
+    # print "Updating "+  self._host + "/" + str(self._port)
     self._Reinit()
     try:
       json_dict = GetJson(self._host, port=self._port)

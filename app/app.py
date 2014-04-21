@@ -21,11 +21,11 @@ for category in servers_config:
 def update_all():
     i = 0.0
     for category in data:
-        d = 3.0 / c
+        d = 5.0 / c
         for server in data[category]:
             i += 1.0
             status = data[category][server]
-            threading.Timer(i * d, lambda: status.Update()).start()
+            threading.Thread(target=lambda: status.Update()).start()
 
 def generate_json():
     alive = "alive"
@@ -42,10 +42,14 @@ def generate_json():
                 response[alive][category][server] = str(status.num_players_online) + "/" + str(status.max_players_online)
             else:
                 response[dead][category].append(server)
-        return response
+        if len(response[alive][category]) == 0:
+            del response[alive][category]
+        if len(response[dead][category]) == 0:
+            del response[dead][category]
+    return response
 
 def schedule():
-    threading.Timer(3, schedule).start()
+    threading.Timer(5, schedule).start()
     update_all()
 
 @route('/status')
