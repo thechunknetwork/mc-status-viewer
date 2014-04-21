@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import mcstatus, yaml, time, threading
 from bottle import route, run, template, static_file
 
@@ -42,10 +43,14 @@ def generate_json():
                 response[alive][category][server] = str(status.num_players_online) + "/" + str(status.max_players_online)
             else:
                 response[dead][category].append(server)
+        response[alive][category] = OrderedDict(sorted(response[alive][category].items(), key=lambda t: t[0]))
+        response[dead][category].sort()
         if len(response[alive][category]) == 0:
             del response[alive][category]
         if len(response[dead][category]) == 0:
             del response[dead][category]
+    response[alive] = OrderedDict(sorted(response[alive].items(), key=lambda t: t[0]))
+    response[dead] = OrderedDict(sorted(response[dead].items(), key=lambda t: t[0]))
     return response
 
 def schedule():

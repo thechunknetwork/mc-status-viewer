@@ -48,8 +48,7 @@ class McServer:
       logging.debug(e)
       return self
     self._num_players_online = json_dict['players']['online']
-    if self._num_players_online:
-      self._max_players_online = json_dict['players']['max']
+    self._max_players_online = json_dict['players']['max']    
     self._available = True
     return self
 
