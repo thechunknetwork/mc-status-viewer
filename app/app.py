@@ -3,6 +3,7 @@ import mcstatus, yaml, time, threading
 from bottle import route, run, template, static_file, error
 
 data = {}
+json_response = None
 
 with open('config.yml', 'r') as cfg_file:
     servers_config = yaml.load(cfg_file)
@@ -53,13 +54,18 @@ def generate_json():
     response[dead] = OrderedDict(sorted(response[dead].items(), key=lambda t: t[0]))
     return response
 
-def schedule():
-    threading.Timer(5, schedule).start()
+def schedule_update():
+    threading.Timer(5, schedule_update).start()
     update_all()
+
+def schedule_json():
+    threading.Timer(1.5, schedule_json).start()
+    global json_response
+    json_response = generate_json()
 
 @route('/status')
 def index():
-    return generate_json()
+    return json_response
 
 @route('/')
 def server_static():
@@ -73,9 +79,10 @@ def error404(error):
 def server_static(filename):
     return static_file(filename, root = '..')
 
-schedule()
+schedule_update()
+schedule_json()
+
 try:
-    run(host='0.0.0.0', port=8080)
+    run(host='localhost', port=8080)
 except KeyboardInterrupt:
     sys.exit(0)
-
