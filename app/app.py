@@ -8,7 +8,7 @@ json_response = None
 with open('config.yml', 'r') as cfg_file:
     servers_config = yaml.load(cfg_file)
 
-c = 0.0
+# c = 0.0
 
 for category in servers_config:
     print category
@@ -16,13 +16,10 @@ for category in servers_config:
     for server in servers_config[category]:
         print "- " + server + ": " + servers_config[category][server]
         ip = servers_config[category][server]
-        if "/" in ip:
-            port = ip.split("/")[1]
-            ip = ip.split("/")[0]
-        else:
-            port = 25565
-        status = mcstatus.McServer(ip, int(port))
-        c += 1
+        if "/" not in ip:
+            ip += "/25565"
+        status = mcstatus.McServer(ip.split("/")[0], ip.split("/")[1])
+        # c += 1
         data[category][server] = status
 
 def update_all():
@@ -33,6 +30,9 @@ def update_all():
 #            i += 1.0
             status = data[category][server]
             threading.Thread(target=lambda: status.Update()).start()
+            
+def sort_dict_by_key(to_sort):
+    return OrderedDict(sorted(to_sort.items(), key=lambda t: t[0]))
 
 def generate_json():
     alive = "alive"
@@ -49,14 +49,14 @@ def generate_json():
                 response[alive][category][server] = str(status.num_players_online) + "/" + str(status.max_players_online)
             else:
                 response[dead][category].append(server)
-        response[alive][category] = OrderedDict(sorted(response[alive][category].items(), key=lambda t: t[0]))
+        response[alive][category] = sort_dict_by_key(response[alive][category])
         response[dead][category].sort()
         if len(response[alive][category]) == 0:
             del response[alive][category]
         if len(response[dead][category]) == 0:
             del response[dead][category]
-    response[alive] = OrderedDict(sorted(response[alive].items(), key=lambda t: t[0]))
-    response[dead] = OrderedDict(sorted(response[dead].items(), key=lambda t: t[0]))
+    response[alive] = sort_dict_by_key(response[alive])
+    response[dead] = sort_dict_by_key(response[dead])
     return response
 
 def schedule_update():
