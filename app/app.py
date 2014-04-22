@@ -16,7 +16,12 @@ for category in servers_config:
     for server in servers_config[category]:
         print "- " + server + ": " + servers_config[category][server]
         ip = servers_config[category][server]
-        status = mcstatus.McServer(ip.split("/")[0], int(ip.split("/")[1]))
+        if "/" in ip:
+            port = ip.split("/")[1]
+            ip = ip.split("/")[0]
+        else:
+            port = 25565
+        status = mcstatus.McServer(ip, int(port))
         c += 1
         data[category][server] = status
 
