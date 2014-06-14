@@ -20,16 +20,18 @@
 *   Run it in a `tmux `or `screen` session
 *   Set up a reverse proxy, here&#039;s a [sample nginx config](http://paste.ubuntu.com/7301975/), [Apache instructions](http://paste.ubuntu.com/7401472/)
 *   `git pull` to update if there are any updates
-*   You can **change the width** by editing `override.css` in the` .btn` class if you have longer server namesPost feedback or suggestions here! Keep in mind that I&#039;m a noob at Python and Javascript (I literally learned JS today), so any code quality feedback would be awesome.
+*   You can **change the width** by editing `override.css` in the` .btn` class if you have longer server names
 
-Here&#039;s the CPU/mem usage you&#039;ll be looking at (pinging way too many servers, running for an hour):
+Post feedback or suggestions here! Keep in mind that I'm a noob at Python and Javascript (I literally learned JS today), so any code quality feedback would be awesome.
+
+Here's the CPU/mem usage you';ll be looking at (pinging way too many servers, running for an hour):
 
 ![](http://i.imgur.com/scyRmnM.png)
 
-It&#039;s not 100% accurate due to the nature of server list ping, but it works well enough (99.99999% accurate). If you&#039;re having issues, ask your host if this is triggering their anti-DDoS mechanism. Delaying the pings does not seem to help in this situation, so your best bet may be to ask your host, or host it on a box that can ping. Updates are every 5 seconds on the server, and then 3 seconds to pull on the client. Obviously, you should allow the box you&#039;re putting this on through your backend firewall.
+It's not 100% accurate due to the nature of server list ping, but it works well enough (99.99999% accurate). If you're having issues, ask your host if this is triggering their anti-DDoS mechanism. Delaying the pings does not seem to help in this situation, so your best bet may be to ask your host, or host it on a box that can ping. Updates are every 5 seconds on the server, and then 3 seconds to pull on the client. Obviously, you should allow the box you're putting this on through your backend firewall.
 
 Technically, you can host the frontend anywhere, just that origin policy complicates things.
 
-If Ctrl+C isn&#039;t stopping it, try Ctrl+Z. A restart needs to be issued for config changes to apply.
+If Ctrl+C isn't stopping it, try Ctrl+Z. A restart needs to be issued for config changes to apply.
 
 **IF YOU ARE USING WINDOWS TO RUN A MINECRAFT SERVER, YOU ARE DOING IT WRONG. QUIT ASKING HOW TO RUN THIS ON WINDOWS. INSTRUCTIONS SHOULD BE VERY SIMILAR, BUT NO GUARANTEES THAT THIS WILL WORK.**
