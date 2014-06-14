@@ -24,7 +24,7 @@
 
 Post feedback or suggestions here! Keep in mind that I'm a noob at Python and Javascript (I literally learned JS today), so any code quality feedback would be awesome.
 
-Here's the CPU/mem usage you';ll be looking at (pinging way too many servers, running for an hour):
+Here's the CPU/mem usage you'll be looking at (pinging way too many servers, running for an hour):
 
 ![](http://i.imgur.com/scyRmnM.png)
 
