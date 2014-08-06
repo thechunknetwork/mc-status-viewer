@@ -41,10 +41,10 @@ class McServer:
 
   def Update(self):
     # print "Updating "+  self._host + "/" + str(self._port)
-    self._Reinit()
     try:
       json_dict = GetJson(self._host, port=self._port)
     except (socket.error, ValueError) as e:
+      self._Reinit()
       logging.debug(e)
       return self
     self._num_players_online = json_dict['players']['online']
