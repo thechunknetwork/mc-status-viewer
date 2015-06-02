@@ -1,12 +1,3 @@
-**Examples (reply to discussion thread if you have one):**
-
-*   [http://status.thechunk.net/](http://status.thechunk.net/)
-*   [http://status.freecraft.eu/](http://status.freecraft.eu/)
-*   [http://endercraftbuild.net/status](http://endercraftbuild.net/status)
-*   [http://www.minotopia.me/status/](http://www.minotopia.me/status/)
-*   [http://status.mycliff.net/](http://status.mycliff.net/)
-*   [http://status.mc-sn.us/](http://status.mc-sn.us/)
-
 **Official Thread:** [http://www.spigotmc.org/resources/mc-status-viewer.518/](http://www.spigotmc.org/resources/mc-status-viewer.518/)
 
 **Installation:**
